@@ -4,7 +4,7 @@ mouse_trigger {
 }
 mouse_trigger {
   input: MOUSE_BUTTON_RIGHT
-  action: "touch"
+  action: "right"
 }
 touch_trigger {
   input: TOUCH_MULTI

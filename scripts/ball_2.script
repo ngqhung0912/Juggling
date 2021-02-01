@@ -90,15 +90,15 @@ end
 
 
 function on_input(self, action_id, action)
-	if action_id == hash("left") then 
+	if action_id == hash("right") then 
 		if action.pressed then 
-			sprite.play_flipbook("player1#sprite", "Player1_balling")
+			sprite.play_flipbook("player2#sprite", "Player2_balling")
 			if self.pos.y <= 150 then 
 				self.is_start_timer = true 
 			end 			
 		elseif action.released then 
 			self.is_start_timer = false 
-			sprite.play_flipbook("player1#sprite", "Player1_stopballing")	
+			sprite.play_flipbook("player2#sprite", "Player2_stopballing")	
 		end
 
 	end
