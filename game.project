@@ -1,0 +1,16 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 288
+height = 728
+
+[android]
+input_method = HiddenInputField
+
+[project]
+title = Juggling
+

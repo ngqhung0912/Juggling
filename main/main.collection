@@ -1,0 +1,62 @@
+name: "main"
+instances {
+  id: "background"
+  prototype: "/main/background.go"
+  position {
+    x: 144.0
+    y: 364.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 1.0
+  }
+}
+instances {
+  id: "player1"
+  prototype: "/main/player1.go"
+  position {
+    x: 76.0
+    y: 130.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 1.0
+  }
+}
+instances {
+  id: "ball"
+  prototype: "/main/ball.go"
+  position {
+    x: 83.0
+    y: 196.0
+    z: 1.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
+    z: 1.0
+  }
+}
+scale_along_z: 0
