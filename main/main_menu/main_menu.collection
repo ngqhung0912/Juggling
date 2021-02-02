@@ -1,25 +1,5 @@
 name: "default"
 instances {
-  id: "controller"
-  prototype: "/main/controller.go"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-instances {
   id: "background"
   prototype: "/main/background.go"
   position {
@@ -39,13 +19,13 @@ instances {
     z: 1.0
   }
 }
-collection_instances {
-  id: "game"
-  collection: "/main/game/game.collection"
+instances {
+  id: "menu"
+  prototype: "/main/main_menu/menu_dynamic.go"
   position {
     x: 0.0
     y: 0.0
-    z: 1.0
+    z: 0.0
   }
   rotation {
     x: 0.0

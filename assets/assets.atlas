@@ -110,11 +110,7 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "Player1_looking"
-  images {
-    image: "/images/player_020.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
+  id: "Player1_looking_low"
   images {
     image: "/images/player_021.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
@@ -124,7 +120,7 @@ animations {
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 60
+  fps: 5
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -148,17 +144,9 @@ animations {
   flip_vertical: 0
 }
 animations {
-  id: "player2_looking"
+  id: "Player2_looking_high"
   images {
-    image: "/images/font_110.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/images/font_111.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/images/font_112.png"
+    image: "/images/player_110.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_ONCE_FORWARD
@@ -180,6 +168,10 @@ animations {
     image: "/images/player_112.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
+  images {
+    image: "/images/player_111.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
   playback: PLAYBACK_ONCE_FORWARD
   fps: 60
   flip_horizontal: 0
@@ -197,6 +189,51 @@ animations {
   }
   images {
     image: "/images/player_022.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Player1_looking_high"
+  images {
+    image: "/images/player_020.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/images/player_021.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 5
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Player1_die"
+  images {
+    image: "/images/player_024.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/images/player_024.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  playback: PLAYBACK_ONCE_FORWARD
+  fps: 60
+  flip_horizontal: 0
+  flip_vertical: 0
+}
+animations {
+  id: "Player2_looking_low"
+  images {
+    image: "/images/player_111.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/images/player_112.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_ONCE_FORWARD

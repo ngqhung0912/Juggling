@@ -1,7 +1,8 @@
-
 function on_message(self, message_id, message, sender)
-	if message_id == hash("update_score") then 
+	if message_id == hash("update_gui_score") then 
 		gui.set_text(gui.get_node("score"), message.score)
+	elseif message_id == hash("show") then 
+		
 	end 	
 end
 
