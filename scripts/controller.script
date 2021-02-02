@@ -1,7 +1,7 @@
 function init(self)
 	self.score = 0
 
-
+	
 end
 
 function final(self)

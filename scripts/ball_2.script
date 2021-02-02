@@ -113,8 +113,10 @@ function on_input(self, action_id, action)
 			end 			
 		elseif action.released then 
 			self.is_start_timer = false 
-			sprite.play_flipbook("player2#sprite", "Player2_stopballing")	
-		end
+			if not self.drop then 	
+				sprite.play_flipbook("player2#sprite", "Player2_stopballing")
+			end 
+				end
 
 	end
 end

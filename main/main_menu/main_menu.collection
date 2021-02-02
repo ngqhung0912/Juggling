@@ -1,25 +1,5 @@
 name: "default"
 instances {
-  id: "background"
-  prototype: "/main/background.go"
-  position {
-    x: 144.0
-    y: 364.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 1.0
-  }
-}
-instances {
   id: "menu"
   prototype: "/main/main_menu/menu_dynamic.go"
   position {
@@ -36,6 +16,26 @@ instances {
   scale3 {
     x: 1.0
     y: 1.0
+    z: 1.0
+  }
+}
+instances {
+  id: "background"
+  prototype: "/main/background.go"
+  position {
+    x: 144.0
+    y: 256.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+  scale3 {
+    x: 2.0
+    y: 2.0
     z: 1.0
   }
 }
