@@ -1,4 +1,4 @@
-name: "default"
+name: "main"
 instances {
   id: "controller"
   prototype: "/main/controller.go"
@@ -24,7 +24,7 @@ instances {
   prototype: "/main/background.go"
   position {
     x: 144.0
-    y: 364.0
+    y: 256.0
     z: 0.0
   }
   rotation {
@@ -36,66 +36,6 @@ instances {
   scale3 {
     x: 2.0
     y: 2.0
-    z: 1.0
-  }
-}
-collection_instances {
-  id: "game"
-  collection: "/main/game/game.collection"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 1.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-collection_instances {
-  id: "main_menu"
-  collection: "/main/main_menu/main_menu.collection"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
-    z: 1.0
-  }
-}
-collection_instances {
-  id: "score_menu"
-  collection: "/main/score_menu/score_menu.collection"
-  position {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-  }
-  rotation {
-    x: 0.0
-    y: 0.0
-    z: 0.0
-    w: 1.0
-  }
-  scale3 {
-    x: 1.0
-    y: 1.0
     z: 1.0
   }
 }

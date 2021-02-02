@@ -25,11 +25,11 @@ function init(self)
 	
 end
 
-function final(self)
-	-- Add finalization code here
-	-- Learn more: https://defold.com/manuals/script/
-	-- Remove this function if not needed
-end
+local function endgame() 
+	print("END GAME")
+	msg.post("main:/controller#controller", "end_game")
+
+end 
 
 function update(self, dt)
 
@@ -74,7 +74,7 @@ function update(self, dt)
 				self.speed_y = - 200 * self.kick_quality - 100 
 				self.accel_y = 350 
 				self.score = self.score + 1 
-				msg.post("/controller", "update_score")
+				msg.post("main:/controller#controller", "update_score")
 			end 
 		end 
 	end 
@@ -84,21 +84,22 @@ function update(self, dt)
 		sprite.play_flipbook("player1#sprite", "Player1_looking_high")
 	end 
 	
-
 	if self.pos.y > 150 and self.pos.y < 200 then 
 		sprite.play_flipbook("player1#sprite", "Player1_looking_low")
 	end 
 
-	if self.drop then 
-		go.animate(go.get_id("/game/player1"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(1.57),  go.EASING_LINEAR, 0.2 )	
-	end 		
-
 	
+
+	if self.drop then 
+		go.animate(go.get_id("/player1"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(1.57),  go.EASING_LINEAR, 0.2, 0, endgame)
+		self.drop = false 	
+	end 		
 	go.set_position(self.pos)
 
 	
 	
 end
+
 
 function on_message(self, message_id, message, sender)
 	-- Add message-handling code here

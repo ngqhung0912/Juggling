@@ -1,12 +1,13 @@
 
-local function start_game()
-end
-local function high_score()
-end
+local anim = require 'main.modules.animateCalls'
 
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+-- 
+-- 	anim.animateButton1(gui.get_node("start"), 0.4)
+-- 	anim.animateButton1(gui.get_node("score"), 0.2)
+-- 	
 end
 
 
@@ -14,12 +15,12 @@ end
 
 function on_input(self, action_id, action)
 	if action_id == hash("left") then
-		if action.pressed then
+		if action.released then
 			if gui.pick_node(gui.get_node("start"), action.x, action.y) then
-				print("start")
+				msg.post("#controller", "start_playing")
 			elseif gui.pick_node(gui.get_node("score"), action.x, action.y) then
-				print("score")
-			elseif gui.pick_node(gui.get_node("score"), action.x, action.y) then
+				msg.post("#controller", "score")
+			elseif gui.pick_node(gui.get_node("rate"), action.x, action.y) then
 				print("rate")
 				
 			end 

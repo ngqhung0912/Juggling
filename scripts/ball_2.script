@@ -71,7 +71,7 @@ function update(self, dt)
 				self.speed_y = - 200 * self.kick_quality - 100 
 				self.accel_y = 350 
 				self.score = self.score + 1 
-				msg.post("/controller", "update_score")
+				msg.post("main:/controller#controller", "update_score")
 				
 			end 
 		end 
@@ -87,7 +87,7 @@ function update(self, dt)
 	end 
 
 	if self.drop then 
-		go.animate(go.get_id("/game/player2"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(-1.57),  go.EASING_LINEAR, 0.2 )	
+		go.animate(go.get_id("/player2"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(-1.57),  go.EASING_LINEAR, 0.2 )	
 	end 		
 	
 	go.set_position(self.pos)

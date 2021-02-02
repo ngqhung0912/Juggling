@@ -1,4 +1,4 @@
-name: "default"
+name: "score"
 instances {
   id: "score_item"
   prototype: "/main/score_menu/score_item.go"
