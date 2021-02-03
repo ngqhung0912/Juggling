@@ -8,12 +8,11 @@ local function save_highscore(highscore)
 	local filename = sys.get_save_file("sys_save_load", "highscore")
 	sys.save(filename, { highscore = highscore })  -- <4>
 end
-
+go.property("secondball", 8)
 
 function init(self)
 	self.score = 0
 	self.high_score = load_highscore()
-	
 	msg.post(".", "start_game")
 	
 	self.state = "main_menu"			
@@ -28,29 +27,13 @@ function final(self)
 	-- Remove this function if not needed
 end
 
-function update(self, dt)
-
-	
-
-
-	-- if self.state == "playing" then 
-	-- 	
-	-- 	if self.score < 2 then 
-	-- 		msg.post("game:/ball2", "disable")
-	-- 	elseif self.score == 2 then
-	-- 		msg.post("game:/ball2","enable")
-	-- 	end 
-	-- 	
-	-- end 
-	-- 		
-			
-
-end 
-
 function on_message(self, message_id, message, sender)
 	if message_id == hash("update_score") then 
 		self.score = self.score + 1 
 		msg.post("game:/score_gui", "update_gui_score", {score = self.score})
+		if self.score == self.secondball then 
+			msg.post("game:/game_controller#game_controller", "enable_2nd_ball")
+		end 
 	end
 
 		
@@ -88,9 +71,10 @@ function on_message(self, message_id, message, sender)
 
 
 	elseif message_id == hash("proxy_loaded") then  
-		if sender == msg.url("#game_proxy") then 
+		if sender == msg.url("#game_proxy") then
 			msg.post(sender, "enable") 
 			self.state = "playing" 
+
 		end 
 
 		if sender == msg.url("#score_menu_proxy") then 

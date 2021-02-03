@@ -1,0 +1,84 @@
+local function endgame() 
+	msg.post("main:/controller#controller", "end_game")
+
+end 
+
+
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	self.ball_list = {}
+	local ball = factory.create("#ball_factory",vmath.vector3(83,211,0.8),nil,{},2)
+	local url = msg.url(nil, ball, "ball")
+	go.set(url, "player", 1)
+	
+	table.insert(self.ball_list, ball)
+
+end
+
+function final(self)
+	self.ball_list = {}
+end
+
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("enable_2nd_ball") then 
+		local ball = factory.create("#ball_factory",vmath.vector3(205,211,0.8),nil,{},2)
+		local url = msg.url(nil, ball, "ball")
+		go.set(url, "player", 2)
+		
+		table.insert(self.ball_list, ball)
+		
+		
+	elseif message_id == hash("ball_dropped") then 
+		go.animate(go.get_id("/player1"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(1.57),  go.EASING_LINEAR, 0.2, 0)
+		go.animate(go.get_id("/player2"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(-1.57),  go.EASING_LINEAR, 0.2, 0, endgame)
+		endgame()
+
+	elseif message_id == hash("look_up") then 
+		if message.index == 1 then 
+			msg.post("player1#sprite", "play_animation", {id = hash("Player1_looking_high")})
+			
+		elseif message.index == 2 then 
+			msg.post("player2#sprite", "play_animation", {id = hash("Player2_looking_high")})
+			
+		end 
+	elseif message_id == hash("look_down") then 
+		if message.index == 1 then 
+			msg.post("player1#sprite", "play_animation", {id = hash("Player1_looking_low")})
+
+		elseif message.index == 2 then 
+			msg.post("player2#sprite", "play_animation", {id = hash("Player2_looking_low")})
+
+		end 
+		
+	end 
+	
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("left") then 
+		if action.pressed then 
+			msg.post(self.ball_list[1], "action_pressed")
+			-- sprite.play_flipbook("player1#sprite", "Player1_balling",flipCom)
+			-- 
+			msg.post("player1#sprite", "play_animation", {id = hash("Player1_balling")})
+			
+		elseif action.released then 
+			msg.post(self.ball_list[1], "action_released")
+			
+		end
+
+	end
+	if action_id == hash("right") and self.ball_list[2] then 
+		if action.pressed then 
+			msg.post(self.ball_list[2], "action_pressed")
+			msg.post("player2#sprite", "play_animation", {id = hash("Player2_balling")})
+			-- sprite.play_flipbook("player2#sprite", "Player2_balling",flipCom)
+			-- 
+		elseif action.released then 
+			msg.post(self.ball_list[2], "action_released")
+		end
+
+	end
+	
+end

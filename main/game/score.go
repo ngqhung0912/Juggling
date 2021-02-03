@@ -1,6 +1,6 @@
 components {
   id: "score"
-  component: "/main/game/gui/score.gui"
+  component: "/main/game/score.gui"
   position {
     x: 0.0
     y: 0.0

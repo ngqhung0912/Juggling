@@ -88,8 +88,16 @@ animations {
     image: "/images/player_024.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
+  images {
+    image: "/images/player_025.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/images/player_021.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 60
+  fps: 20
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -122,8 +130,16 @@ animations {
     image: "/images/player_114.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
+  images {
+    image: "/images/player_115.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
+  images {
+    image: "/images/player_111.png"
+    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
+  }
   playback: PLAYBACK_ONCE_FORWARD
-  fps: 60
+  fps: 20
   flip_horizontal: 0
   flip_vertical: 0
 }
@@ -145,34 +161,7 @@ animations {
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   images {
-    image: "/images/player_115.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
     image: "/images/player_112.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/images/player_111.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  playback: PLAYBACK_ONCE_FORWARD
-  fps: 60
-  flip_horizontal: 0
-  flip_vertical: 0
-}
-animations {
-  id: "Player1_stopballing"
-  images {
-    image: "/images/player_024.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/images/player_025.png"
-    sprite_trim_mode: SPRITE_TRIM_MODE_OFF
-  }
-  images {
-    image: "/images/player_022.png"
     sprite_trim_mode: SPRITE_TRIM_MODE_OFF
   }
   playback: PLAYBACK_ONCE_FORWARD

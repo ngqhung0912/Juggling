@@ -250,7 +250,7 @@ nodes {
   }
   size {
     x: 22.0
-    y: 22.0
+    y: 24.0
     z: 0.0
     w: 1.0
   }
@@ -262,7 +262,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "assets/medals_3"
+  texture: "assets/shadow"
   id: "medal"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE

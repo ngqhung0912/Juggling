@@ -1,9 +1,24 @@
+
+local function get_medal(score)
+	if not score then 
+		score = 0 
+	end 
+	
+	if score >= 10 and score < 20 then
+		gui.play_flipbook(gui.get_node("medal"), "medals_3")
+	elseif score >= 20 and score < 30 then 
+		gui.play_flipbook(gui.get_node("medal"), "medals_2")
+	elseif score >= 30 and score < 40 then 
+		gui.play_flipbook(gui.get_node("medal"), "medals_1")
+	elseif score >= 40 then
+		gui.play_flipbook(gui.get_node("medal"), "medals_0")
+	end 
+
+end 
+
+
 function init(self)
 	msg.post(".", "acquire_input_focus")
-	-- 
-	-- 	anim.animateButton1(gui.get_node("start"), 0.4)
-	-- 	anim.animateButton1(gui.get_node("score"), 0.2)
-	-- 	
 end
 
 
@@ -30,11 +45,14 @@ function on_message(self, message_id, message)
 	if message_id == hash("score") then
 		gui.set_text(gui.get_node("score"), message.score)
 		gui.set_text(gui.get_node("highscore"), message.high_score)
+		
+		get_medal(message.score)
 				
 	elseif message_id == hash("new_high_score") then 
 		gui.set_text(gui.get_node("highscore"), message.high_score)
 		gui.set_text(gui.get_node("score"), message.high_score)
-		gui.set_text(gui.get_node("new"), "assets/new")
+		get_medal(message.high_score)
+		gui.play_flipbook(gui.get_node("new"), "assets/new")
 		
 
 	end  
