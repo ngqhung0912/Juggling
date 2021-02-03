@@ -26,7 +26,6 @@ function init(self)
 end
 
 local function endgame() 
-	print("END GAME")
 	msg.post("main:/controller#controller", "end_game")
 
 end 

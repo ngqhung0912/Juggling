@@ -1,4 +1,4 @@
-script: ""
+script: "/scripts/score_menu.gui_script"
 fonts {
   name: "score"
   font: "/assets/score.font"
@@ -316,7 +316,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "assets/new"
+  texture: ""
   id: "new"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE

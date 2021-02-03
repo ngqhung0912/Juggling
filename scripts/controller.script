@@ -12,10 +12,8 @@ end
 
 function init(self)
 	self.score = 0
-	self.highscore = load_highscore()
-	 
+	self.high_score = load_highscore()
 	
-
 	msg.post(".", "start_game")
 	
 	self.state = "main_menu"			
@@ -31,6 +29,8 @@ function final(self)
 end
 
 function update(self, dt)
+
+	
 
 
 	-- if self.state == "playing" then 
@@ -73,7 +73,14 @@ function on_message(self, message_id, message, sender)
 		
 	elseif message_id == hash("start_playing") then  
 		msg.post("#game_proxy", "load")
+
+		if self.state == "score" then 
+			msg.post("#score_menu_proxy", "unload")
+		end 
+		
 		msg.post("#main_menu", "disable")
+		
+		
 
 	elseif message_id == hash("score") then 
 		msg.post("#score_menu_proxy", "load")
@@ -89,17 +96,22 @@ function on_message(self, message_id, message, sender)
 		if sender == msg.url("#score_menu_proxy") then 
 			msg.post(sender, "enable") 
 			self.state = "score" 
+			if  self.score > self.high_score  then 
+				self.high_score = self.score 
+				save_highscore(self.high_score)
+				msg.post("score:/score_item", "new_high_score", {high_score = self.high_score})
+				self.score = 0  
+				
+			else	
+				msg.post("score:/score_item", "score", {score = self.score, high_score = self.high_score})
+				self.score = 0 
+			end 
 		end 
 
 	elseif message_id == hash("end_game") then
 		msg.post("#game_proxy", "unload")
 		msg.post("#score_menu_proxy", "load")
-		if self.highscore < self.score then 
-			self.highscore = self.score  
-			save_highscore(self.highscore)
-		else
-			print("low score")
-		end 
+		
 		
 	end 
 
