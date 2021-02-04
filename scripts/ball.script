@@ -1,9 +1,7 @@
 go.property("player", 1)
 
 function init(self)
-	msg.post(".", "acquire_input_focus")
-	print(msg.url())
-	
+	msg.post(".", "acquire_input_focus")	
 	
 	self.speed_x = 0 
 	self.speed_y = 150 
@@ -96,8 +94,6 @@ end
 
 
 function on_message(self, message_id, message, sender)
-
-	
 	if message_id == hash("action_pressed") then 
 		if self.pos.y <= 150 then 
 			self.is_start_timer = true 
@@ -106,9 +102,5 @@ function on_message(self, message_id, message, sender)
 
 	if message_id == hash("action_released") then
 		self.is_start_timer = false 
-	end 
-		
+	end 	
 end
-
-
--- 

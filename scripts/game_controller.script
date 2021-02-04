@@ -3,24 +3,15 @@
 go.property("secondball", 8)
 
 function init(self)
+	self.ready_1 = false
+	self.ready_2 = false
 	msg.post(".", "acquire_input_focus")
 	self.ball_drop = false
 	self.ball_list = {}
 	msg.post("/score_gui", "disable")
-	go.animate("/dummyAnimation", "position.y", go.PLAYBACK_ONCE_FORWARD, 20, go.EASING_LINEAR, 3, 0, function() 
-		local ball = factory.create("#ball_factory",vmath.vector3(83,211,0.8),nil, {player = 1},2)
-		table.insert(self.ball_list, ball)
-		msg.post("/ready", "disable")
-		msg.post("/score_gui", "enable")	
-	end 
-)
-		
 
--- 	local ball = factory.create("#ball_factory",vmath.vector3(83,211,0.8),nil, {player = 1},2)
--- 	table.insert(self.ball_list, ball)
--- 
 	self.score = 0
-	
+
 end
 
 function final(self)
@@ -29,6 +20,20 @@ function final(self)
 	
 end
 
+function update(self,dt)
+	if self.ready_1 and self.ready_2 then 
+		self.ready_1 = false
+		self.ready_2 = false
+		timer.delay(1,false, function() 
+			local ball = factory.create("#ball_factory",vmath.vector3(83,211,0.8),nil, {player = 1},2)
+			table.insert(self.ball_list, ball)
+			msg.post("/ready", "disable")
+			msg.post("/score_gui", "enable")	
+		end )
+	end 
+end 
+
+	
 
 function on_message(self, message_id, message, sender)
 
@@ -44,16 +49,29 @@ function on_message(self, message_id, message, sender)
 	elseif message_id == hash("ball_dropped") then 
 		self.ball_drop = true
 		msg.post("main:/controller#controller", "final_score", {score = self.score})
-		msg.post("/player1#sprite", "play_animation", {id = hash("016")})
-		msg.post("/player2#sprite", "play_animation", {id = hash("126")})	
+		
+		-- set sprite to square leg 
+		msg.post("/player1#sprite", "play_animation", {id = hash("016")}) 
+		msg.post("/player2#sprite", "play_animation", {id = hash("126")}) 
+		
+		-- play falling down animation 
 		go.animate(go.get_id("/player1"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(1.57),  go.EASING_LINEAR, 0.4, 0)
 		go.animate(go.get_id("/player2"), "rotation", go.PLAYBACK_ONCE_FORWARD, vmath.quat_rotation_z(-1.57),  go.EASING_LINEAR, 0.4, 0)
+
+		-- if there's 2nd ball then play the fading animation for it
 		if self.ball_list[2] then 
-			go.animate("/instance1#ball_sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.5, 0)
-		end 
-		go.animate("/instance0#ball_sprite", "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.5, 0, function() 
+			local  sprite_url = msg.url(nil, self.ball_list[2], "ball_sprite")
+			go.animate(sprite_url, "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.5, 0)
+		end
+
+		-- play fading animtion for 1st ball, with end function to delete the ball and to message the controller 
+		local sprite_url = msg.url(nil, self.ball_list[1], "ball_sprite")
+		go.animate(sprite_url, "tint.w", go.PLAYBACK_ONCE_FORWARD, 0, go.EASING_LINEAR, 1.5, 0, function() 
 			msg.post("main:/controller#controller", "end_game")
+			go.delete(msg.url(nil, self.ball_list[1], "ball"))
+			go.delete(msg.url(nil, self.ball_list[2], "ball"))
 		end )
+		
 
 	elseif message_id == hash("look_up") then 
 		if message.index == 1 then 
@@ -70,25 +88,43 @@ function on_message(self, message_id, message, sender)
 		elseif message.index == 2 then 
 			msg.post("player2#sprite", "play_animation", {id = hash("Player2_looking_low")})
 		end 
+
 	end 
 end
 
 function on_input(self, action_id, action)
-	if action_id == hash("left") and self.ball_list[1] and not self.ball_drop then 
+	if action_id == hash("left") and not self.ball_drop then 
 		if action.pressed then 
-			msg.post(self.ball_list[1], "action_pressed")
+			if self.ball_list[1] then 
+				msg.post(self.ball_list[1], "action_pressed")
+				self.ready_1 = false
+			else 
+				self.ready_1 = true
+				print("start the ball")
+			end 
 			msg.post("player1#sprite", "play_animation", {id = hash("Player1_balling")})
 		elseif action.released then 
-			msg.post(self.ball_list[1], "action_released")
+			if self.ball_list[1] then 	
+				msg.post(self.ball_list[1], "action_released")
+			end
 		end
 
 	end
-	if action_id == hash("right") and self.ball_list[2] and not self.ball_drop then 
+	
+	if action_id == hash("right") and not self.ball_drop then 
 		if action.pressed then 
-			msg.post(self.ball_list[2], "action_pressed")
+			if self.ball_list[2] then 
+				msg.post(self.ball_list[2], "action_pressed")
+				self.ready_2 = false
+				
+			else 
+				self.ready_2 = true
+			end 
 			msg.post("player2#sprite", "play_animation", {id = hash("Player2_balling")})
 		elseif action.released then 
-			msg.post(self.ball_list[2], "action_released")
+			if self.ball_list[2] then 	
+				msg.post(self.ball_list[2], "action_released")
+			end 
 		end
 
 	end
