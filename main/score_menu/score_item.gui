@@ -249,8 +249,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 22.0
-    y: 24.0
+    x: 100.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -262,7 +262,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: "assets/shadow"
+  texture: "assets/transparent"
   id: "medal"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE
@@ -303,8 +303,8 @@ nodes {
     w: 1.0
   }
   size {
-    x: 16.0
-    y: 7.0
+    x: 100.0
+    y: 100.0
     z: 0.0
     w: 1.0
   }
@@ -316,7 +316,7 @@ nodes {
   }
   type: TYPE_BOX
   blend_mode: BLEND_MODE_ALPHA
-  texture: ""
+  texture: "assets/transparent"
   id: "new"
   xanchor: XANCHOR_NONE
   yanchor: YANCHOR_NONE

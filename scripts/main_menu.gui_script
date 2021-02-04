@@ -22,12 +22,10 @@ function on_input(self, action_id, action)
 				msg.post("#controller", "score")
 			elseif gui.pick_node(gui.get_node("rate"), action.x, action.y) then
 				print("rate")
-				
 			end 
 		end 
 	end
 end
-
 
 
 

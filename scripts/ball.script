@@ -2,6 +2,8 @@ go.property("player", 1)
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
+	print(msg.url())
+	
 	
 	self.speed_x = 0 
 	self.speed_y = 150 
@@ -35,9 +37,8 @@ function update(self, dt)
 	self.pos = go.get_position()
 
 	
-	
-	self.pos.x = self.pos.x - self.speed_x*dt*0.7
-	self.pos.y = self.pos.y - self.speed_y*dt*0.7
+	self.pos.x = self.pos.x - self.speed_x*dt*0.6
+	self.pos.y = self.pos.y - self.speed_y*dt*0.6
 	
 	self.speed_x = self.speed_x + self.accel_x*dt
 	self.speed_y = self.speed_y + self.accel_y*dt
@@ -52,6 +53,9 @@ function update(self, dt)
 			self.speed_y = 0 
 			self.accel_y = 0 
 		end 
+		msg.post("/game_controller#game_controller", "ball_dropped")
+		self.drop = false 	
+		
 	end 	
 	
 
@@ -67,29 +71,23 @@ function update(self, dt)
 	end 
 
 	if self.speed_y > 0 and not self.drop then  
-		if self.pos.y >= 128 and self.pos.y <= 132 then 
+		if self.pos.y >= 124 and self.pos.y <= 128 then 
 			if self.kick_quality > 0 then 
 				self.speed_y = - 200 * self.kick_quality - 100 
 				self.accel_y = 350 
 				self.score = self.score + 1 
-				msg.post("main:/controller#controller", "update_score")
+				msg.post("/game_controller#game_controller", "update_score")
 			end 
 		end 
 	end 
 
 
-	if self.pos.y > 200 then 
+	if self.pos.y > 170 then 
 		msg.post("/game_controller#game_controller", "look_up", { index = self.player })
 	elseif self.pos.y > 150 then 
 		msg.post("/game_controller#game_controller", "look_down", { index = self.player })
 	end 
 
-	
-
-	if self.drop then 
-		msg.post("/game_controller#game_controller", "ball_dropped")
-		self.drop = false 	
-	end 		
 	go.set_position(self.pos)
 
 	
@@ -98,6 +96,8 @@ end
 
 
 function on_message(self, message_id, message, sender)
+
+	
 	if message_id == hash("action_pressed") then 
 		if self.pos.y <= 150 then 
 			self.is_start_timer = true 

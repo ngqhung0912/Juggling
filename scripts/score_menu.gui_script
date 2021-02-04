@@ -52,7 +52,7 @@ function on_message(self, message_id, message)
 		gui.set_text(gui.get_node("highscore"), message.high_score)
 		gui.set_text(gui.get_node("score"), message.high_score)
 		get_medal(message.high_score)
-		gui.play_flipbook(gui.get_node("new"), "assets/new")
+		gui.play_flipbook(gui.get_node("new"), "new")
 		
 
 	end  
